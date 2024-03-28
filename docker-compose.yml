@@ -1,0 +1,26 @@
+#version: '3.8'
+
+services:
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    networks:
+      - zipkin_network
+    volumes:
+      - zipkin_log_db:/zipkin-log
+
+volumes:
+  zipkin_log_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/../opentelemetry_test/zipkin_log_db
+
+networks:
+  zipkin_network:
