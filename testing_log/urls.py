@@ -5,4 +5,5 @@ from testing_log import views
 
 urlpatterns = [
     path('', views.hello_world, name='hello_world'),
+    path('multiply/<int:number>/', views.multiply, name='multiply'),
 ]
